@@ -1,0 +1,32 @@
+<div class="container">
+  <!-- No data message -->
+  <p *ngIf="Turno.length <= 0" class="no-data text-center">Ainda não existe turno adicionado!</p>
+
+  <nav *ngIf="Turno.length > 0" class="navbar navbar-expand-lg navbar-light bg-light">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Consulta de Turnos</h5>
+    <a class="btn btn-outline-primary" routerLinkActive="active" routerLink="/turnos/create">Adcionar Turno</a>
+  </nav>
+
+  <!-- Turno list -->
+  <table class="table table-bordered" *ngIf="Turno.length > 0">
+    <thead class="table-success">
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col center" width="180">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let turno of Turno; let i = index">
+        <td>{{turno.nome}}</td>
+        <td class="text-center edit-block">
+          <span class="edit" [routerLink]="['/turnos/edit/', turno._id]">
+            <button type="button" class="btn btn-success btn-sm">Editar</button>
+          </span>
+          <span class="delete" (click)="removeTurno(turno, i)">
+            <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

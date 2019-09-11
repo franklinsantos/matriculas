@@ -1,0 +1,27 @@
+<div class="row justify-content-center">
+    <div class="col-md-4 register-turno">
+        <!-- form card register -->
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <div class="card card-outline-secondary">
+                <div class="card-header">
+                    <h3 class="mb-0">Editar Turno</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputNome">Nome</label>
+                        <input class="form-control" type="text" formControlName="nome">
+                        <div class="invalid-feedback" *ngIf="submitted && myForm.nome.errors?.required">
+                            Nome é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="card-footer text-right">
+                        <button class="btn btn-default" type="button" routerLink="/turnos/list">Cancelar</button>
+                        <button class="btn btn-primary" type="submit">Confirmar</button>
+                    </div>
+
+                </div>
+            </div>
+        </form><!-- form  -->
+    </div>
+</div>

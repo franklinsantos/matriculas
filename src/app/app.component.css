@@ -1,0 +1,6 @@
+.menu-spacer {
+  flex: 1 1 auto;
+}
+.container-fluid{
+  padding: 0 20px !important;
+}

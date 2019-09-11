@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-md-6 register-unidade">
+        <!-- form card register -->
+
+        <form [formGroup]="unidadeForm" (ngSubmit)="onSubmit()">
+            <div class="card card-outline-secondary">
+                <div class="card-header">
+                    <h3 class="mb-0">Adicionar Unidade</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputNome">Nome</label>
+                        <input class="form-control" type="text" formControlName="nome">
+                        <!-- error -->
+                        <div class="invalid-feedback" *ngIf="submitted && myForm.nome.errors?.required">
+                            Nome é obrigatório.
+                        </div>
+                    </div>
+                    <hr>
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <h5 class="my-0 mr-md-auto font-weight-normal">Cursos</h5>
+                        <a class="btn btn-outline-primary" routerLinkActive="active" data-toggle="modal"
+                           data-target="#formModal">Adicionar</a>
+                    </nav>
+                    <!-- Curso list -->
+                    <table class="table table-bordered">
+                        <thead class="table-success">
+                        <tr>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Turno</th>
+                            <th scope="col">Capacidade</th>
+                            <th scope="col center">Opções</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let cursoUT of Unidade?.cursoUnidadeTurno; let i = index">
+                            <!-- <th scope="row">{{curso._id}}</th>-->
+                            <td>{{cursoUT.curso.tipo?.nome}}</td>
+                            <td>{{cursoUT.curso?.nome}}</td>
+                            <td>{{cursoUT.turno?.nome}}</td>
+                            <td>{{cursoUT.capacidade}}</td>
+                            <td class="text-center edit-block">
+                                <span class="delete" (click)="removeCurso(cursoUT, i)">
+                                  <button type="button" class="btn btn-danger btn-sm">Remover</button>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-right">
+                    <button class="btn btn-default" type="button" routerLink="/unidades/list">Cancelar</button>
+                    <button class="btn btn-primary" type="submit">Confirmar</button>
+                </div>
+            </div>
+        </form>
+
+    </div><!-- form card register -->
+</div>
+
+<!-- Modal -->
+<app-add-curso-dialog (onHideParent)="onHideAddCursoDialog($event)"></app-add-curso-dialog>

@@ -1,0 +1,34 @@
+<div class="container">
+  <!-- No data message -->
+  <p *ngIf="Curso.length <= 0" class="no-data text-center">Ainda não existe curso adicionado!</p>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Consulta de Cursos</h5>
+    <a class="btn btn-outline-primary" routerLinkActive="active" routerLink="/cursos/create">Adicionar Curso</a>
+  </nav>
+
+  <!-- Curso list -->
+  <table class="table table-bordered" *ngIf="Curso.length > 0">
+    <thead class="table-success">
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Tipo</th>
+        <th scope="col center" width="180">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let curso of Curso; let i = index">
+        <td>{{curso.nome}}</td>
+        <td>{{curso.tipo?.nome}}</td>
+        <td class="text-center edit-block">
+          <span class="edit" [routerLink]="['/cursos/edit/', curso._id]">
+            <button type="button" class="btn btn-success btn-sm">Editar</button>
+          </span>
+          <span class="delete" (click)="removeCurso(curso, i)">
+            <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

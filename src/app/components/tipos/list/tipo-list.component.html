@@ -1,0 +1,32 @@
+<div class="container">
+  <!-- No data message -->
+  <p *ngIf="Tipo.length <= 0" class="no-data text-center">Ainda não existe tipo adicionado!</p>
+
+  <nav *ngIf="Tipo.length > 0" class="navbar navbar-expand-lg navbar-light bg-light">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Consulta de Tipos</h5>
+    <a class="btn btn-outline-primary" routerLinkActive="active" routerLink="/tipos/create">Adcionar Tipo</a>
+  </nav>
+
+  <!-- Tipo list -->
+  <table class="table table-bordered" *ngIf="Tipo.length > 0">
+    <thead class="table-success">
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col center" width="180">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tipo of Tipo; let i = index">
+        <td>{{tipo.nome}}</td>
+        <td class="text-center edit-block">
+          <span class="edit" [routerLink]="['/tipos/edit/', tipo._id]">
+            <button type="button" class="btn btn-success btn-sm">Editar</button>
+          </span>
+          <span class="delete" (click)="removeTipo(tipo, i)">
+            <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

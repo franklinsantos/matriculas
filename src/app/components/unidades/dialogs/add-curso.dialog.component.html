@@ -1,0 +1,72 @@
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar Curso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="cursoForm" (ngSubmit)="onSubmitCurso()">
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="inputTipo">Tipo</label>
+            <select class="custom-select form-control" [(ngModel)]="cursoUnidadeTurno.tipo"
+                    formControlName="tipo" id="selectTipo" name="selectTipo">
+              <option value="">Escolha...</option>
+              <option *ngFor="let tipo of Tipos" [ngValue]="tipo">{{tipo.nome}}
+              </option>
+            </select>
+            <!-- error -->
+            <div class="invalid-feedback" *ngIf="submitted && myCursoForm.tipo.errors?.required">
+              Escolha o tipo.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputTurno">Turno</label>
+            <select class="custom-select form-control" [(ngModel)]="cursoUnidadeTurno.turno"
+                    formControlName="turno" id="selectTurno">
+              <option value="">Escolha...</option>
+              <option *ngFor="let turno of Turnos" [ngValue]="turno">{{turno.nome}}
+              </option>
+            </select>
+            <!-- error -->
+            <div class="invalid-feedback" *ngIf="submitted && myCursoForm.turno.errors?.required">
+              Escolha o turno.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputCurso">Curso</label>
+            <select class="custom-select form-control" [(ngModel)]="cursoUnidadeTurno.curso"
+                    formControlName="curso" id="selectCurso">
+              <option value="">Escolha...</option>
+              <option *ngFor="let curso of Cursos" [ngValue]="curso">{{curso.nome}}
+              </option>
+            </select>
+            <!-- error -->
+            <div class="invalid-feedback" *ngIf="submitted && myCursoForm.curso.errors?.required">
+              Escolha o curso.
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="form-group">
+            <label for="inputCapacidade">Capacidade</label>
+            <input class="form-control" type="text" formControlName="capacidade" [(ngModel)]="cursoUnidadeTurno.capacidade">
+            <div class="invalid-feedback" *ngIf="submitted && myCursoForm.capacidade.errors?.required">
+              Capacidade é obrigatório.
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" type="submit">Adicionar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

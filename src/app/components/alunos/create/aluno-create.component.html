@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-md-6 register-aluno">
+        <!-- form card register -->
+        <form [formGroup]="alunoForm" (ngSubmit)="onSubmit()">
+            <div class="card card-outline-secondary">
+                <div class="card-header">
+                    <h3 class="mb-0">Adicionar Aluno</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputNome">Nome</label>
+                        <input class="form-control" type="text" formControlName="nome">
+                        <!-- error -->
+                        <div class="invalid-feedback" *ngIf="submitted && myForm.nome.errors?.required">
+                            Nome é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEmail">E-mail</label>
+                        <input class="form-control" type="text" formControlName="email">
+                        <!-- error -->
+                        <div class="invalid-feedback" *ngIf="submitted && myForm.email.errors?.required">
+                            E-mail é obrigatório.
+                        </div>
+
+                        <div class="invalid-feedback" *ngIf="submitted && myForm.email.errors?.pattern">
+                            Informe um e-mail válido.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCPF">CPF</label>
+                        <input class="form-control" type="text" formControlName="cpf">
+                        <!-- error -->
+                        <div class="invalid-feedback" *ngIf="submitted && myForm.cpf.errors?.required">
+                            CPF é obrigatório.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="submitted && myForm.cpf.errors?.pattern">
+                            Informe um CPF válido.
+                        </div>
+                    </div>
+                    <hr>
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <h5 class="my-0 mr-md-auto font-weight-normal">Matrícula em Cursos</h5>
+                        <a class="btn btn-outline-primary" routerLinkActive="active" data-toggle="modal"
+                           data-target="#formModal">Adicionar</a>
+                    </nav>
+                    <!-- Curso list -->
+                    <table class="table table-bordered">
+                        <thead class="table-success">
+                        <tr>
+                            <th scope="col">Data/Hora</th>
+                            <th scope="col">Unidade</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Turno</th>
+                            <th scope="col center">Opções</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let matricula of Aluno?.matriculas; let i = index">
+                            <td>{{matricula.cursoUnidadeTurno?.created_at | date:'dd/mm/yyyy h:mm:ss' }}</td>
+                            <td>{{matricula.unidade.nome}}</td>
+                            <td>{{matricula.tipo?.nome}}</td>
+                            <td>{{matricula.curso?.nome}}</td>
+                            <td>{{matricula.turno?.nome}}</td>
+
+                            <td class="text-center edit-block">
+                <span class="delete" (click)="removeMatricula(matricula, i)">
+                  <button type="button" class="btn btn-danger btn-sm">Remover</button>
+                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-right">
+                    <button class="btn btn-default" type="button" routerLink="/alunos/list">Cancelar</button>
+                    <button class="btn btn-primary" type="submit">Confirmar</button>
+                </div>
+            </div>
+        </form>
+    </div><!-- form card register -->
+</div>
+
+<!-- Modal -->
+<app-add-curso-aluno-dialog (onHideParent)="onHideAddCursoDialog($event)"></app-add-curso-aluno-dialog>
