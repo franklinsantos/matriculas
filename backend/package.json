@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@babel/register": "^7.6.0",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "nodemon": "^1.19.2"
   }
 }
